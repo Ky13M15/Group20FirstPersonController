@@ -7176,6 +7176,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -9.423252, y: 4.9700994, z: 20.67331}
   m_LocalScale: {x: 1, y: 1, z: 1}
+<<<<<<< Updated upstream
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1574450346}
@@ -7267,6 +7268,13 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 128754515}
   m_Mesh: {fileID: -5495902117074765545, guid: 65eb2b5813ef1b7408a89e133788d74a, type: 3}
+=======
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1574450346}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+>>>>>>> Stashed changes
 --- !u!1 &159014677
 GameObject:
   m_ObjectHideFlags: 0
@@ -10095,6 +10103,7 @@ MonoBehaviour:
   m_SelectedFaces: 
   m_SelectedEdges: []
   m_SelectedVertices: 
+<<<<<<< Updated upstream
 --- !u!1 &190873149
 GameObject:
   m_ObjectHideFlags: 0
@@ -10111,6 +10120,8 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+=======
+>>>>>>> Stashed changes
 --- !u!43 &195191758
 Mesh:
   m_ObjectHideFlags: 0
@@ -25582,6 +25593,7 @@ MonoBehaviour:
   m_SelectedFaces: 
   m_SelectedEdges: []
   m_SelectedVertices: 
+<<<<<<< Updated upstream
 --- !u!4 &456733230
 Transform:
   m_ObjectHideFlags: 0
@@ -25599,6 +25611,13 @@ Transform:
   - {fileID: 166883052}
   m_Father: {fileID: 330585546}
   m_LocalEulerAnglesHint: {x: 2.553, y: -0.177, z: 5.563}
+=======
+--- !u!4 &456733230 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 65eb2b5813ef1b7408a89e133788d74a, type: 3}
+  m_PrefabInstance: {fileID: 1476631687}
+  m_PrefabAsset: {fileID: 0}
+>>>>>>> Stashed changes
 --- !u!1 &487193456
 GameObject:
   m_ObjectHideFlags: 0
@@ -54298,6 +54317,7 @@ Mesh:
     offset: 0
     size: 0
     path: 
+<<<<<<< Updated upstream
 --- !u!1 &1348715569
 GameObject:
   m_ObjectHideFlags: 0
@@ -54415,6 +54435,11 @@ MeshRenderer:
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 3380964527044276259, guid: b03f25ee74e3e7441b4ec84518fb0569, type: 3}
+=======
+--- !u!1 &1348715569 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5468917266634320511, guid: b03f25ee74e3e7441b4ec84518fb0569, type: 3}
+>>>>>>> Stashed changes
   m_PrefabInstance: {fileID: 303019304270552275}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1348715569}
@@ -68151,7 +68176,11 @@ GameObject:
   - component: {fileID: 1574450343}
   m_Layer: 0
   m_Name: MeteorPS
+<<<<<<< Updated upstream
   m_TagString: Untagged
+=======
+  m_TagString: Explosions
+>>>>>>> Stashed changes
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
