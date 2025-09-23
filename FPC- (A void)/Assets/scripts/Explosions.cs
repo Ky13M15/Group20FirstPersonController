@@ -2,10 +2,6 @@ using NUnit.Framework;
 using UnityEditor;
 using UnityEngine;
 using System.Collections.Generic;
-<<<<<<< Updated upstream
-=======
-using System.Collections;
->>>>>>> Stashed changes
 
 //Title: How to make a METEOR SHOWER for your game - Unity - Blender - Visual effects
 //Author: Stick Wizard
