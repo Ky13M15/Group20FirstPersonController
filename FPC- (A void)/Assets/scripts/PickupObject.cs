@@ -4,10 +4,14 @@ public class PickupObject : MonoBehaviour
 {
     private Rigidbody rb;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
+<<<<<<< Updated upstream
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
     }
+=======
+    void Awake() => rb = GetComponent<Rigidbody>();
+>>>>>>> Stashed changes
     public void Pickup(Transform holdpoint)
     {
         rb.useGravity = false;
@@ -33,14 +37,22 @@ public class PickupObject : MonoBehaviour
 
     }
 
+<<<<<<< Updated upstream
     public void MoveToHoldPoint(Vector3 targetPostion)
     {
         rb.MovePosition(targetPostion);
     }
+=======
+    public void MoveToHoldPoint(Vector3 targetPostion) => rb.MovePosition(targetPostion);
+>>>>>>> Stashed changes
 
     // Update is called once per frame
     void Update()
     {
+<<<<<<< Updated upstream
 
+=======
+        
+>>>>>>> Stashed changes
     }
 }
