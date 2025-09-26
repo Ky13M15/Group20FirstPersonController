@@ -78,15 +78,9 @@
                     "initialStateCheck": false
                 },
                 {
-<<<<<<< Updated upstream
                     "name": "Quit",
                     "type": "Button",
                     "id": "a826134c-3027-4e80-a6c4-caa878af5198",
-=======
-                    "name": "Interact",
-                    "type": "Button",
-                    "id": "88913ed8-2f2c-43f1-9ee7-7c9d46822182",
->>>>>>> Stashed changes
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -415,32 +409,12 @@
                 },
                 {
                     "name": "",
-<<<<<<< Updated upstream
                     "id": "7e24912b-453c-4b82-934e-fda242c176a8",
                     "path": "<Keyboard>/escape",
                     "interactions": "",
                     "processors": "",
                     "groups": ";Keyboard",
                     "action": "Quit",
-=======
-                    "id": "6b8e0f52-119e-4364-8ed4-0a8e1f423532",
-                    "path": "<Keyboard>/e",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";Keyboard",
-                    "action": "Interact",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "d76e0f03-609e-45f4-b561-724ef8a7073a",
-                    "path": "<Gamepad>/buttonSouth",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";Gamepad",
-                    "action": "Interact",
->>>>>>> Stashed changes
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
