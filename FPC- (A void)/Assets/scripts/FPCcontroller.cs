@@ -1,6 +1,8 @@
 ﻿using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using TMPro;
+using UnityEngine.UI;
 
 
 
@@ -12,9 +14,9 @@ public class FPController : MonoBehaviour
     public float normalFOV = 60f;
     public float aimFOV = 40f;
     public float aimSpeed = 10f;
-    [SerializeField]private float interactRange = 3f;
+    [SerializeField] private float interactRange = 3f;
     [SerializeField] LayerMask interactLayer;
-   
+
 
     private bool isAiming = false;
 
@@ -52,11 +54,18 @@ public class FPController : MonoBehaviour
     public float pickupRange = 3f;
     public Transform holdPoint;
     private PickupObject heldObject;
+    public TMP_Text pickupText;
+
 
     [Header("Throwing settings")]
     public float throwForce = 10f;
     public float throwUpwardBoost = 1f;
 
+    [Header("UI Settings")]
+    public TextMeshProUGUI pickUpText;
+    public Image healthBar;
+    public float healthDamageAmount = 0.25f;
+    private float healAmount = 0.5f;
 
 
     private void Awake()
@@ -75,8 +84,8 @@ public class FPController : MonoBehaviour
         {
             playerCamera = Camera.main;
         }
-       
-       
+
+
 
     }
     private void Update()
@@ -88,12 +97,23 @@ public class FPController : MonoBehaviour
         {
             heldObject.MoveToHoldPoint(holdPoint.position);
         }
-
+        Ray ray = new Ray(cameraTransform.position, cameraTransform.forward);
+        if (Physics.Raycast(ray, out RaycastHit hit, pickupRange))
+        {
+            PickupObject pickup = hit.collider.GetComponent<PickupObject>();
+            if (pickup != null)
+            {
+                pickupText.text = pickup.gameObject.name;
+                return;
+            }
+        }
+        //clear text if not looking at a pickup
+        pickupText.text = "";
 
         float targetFOV = isAiming ? aimFOV : normalFOV;
         float newFOV = Mathf.Lerp(playerCamera.fieldOfView, targetFOV, Time.deltaTime * aimSpeed);
-        
-       
+
+
     }
 
 
@@ -165,9 +185,9 @@ public class FPController : MonoBehaviour
     }
     public void OnInteract(InputAction.CallbackContext context)
     {
-        Ray ray =new Ray(playerCamera.transform.position, playerCamera.transform.forward);
-        
-        if (Physics.Raycast(ray,out RaycastHit hit, interactRange, interactLayer))
+        Ray ray = new Ray(playerCamera.transform.position, playerCamera.transform.forward);
+
+        if (Physics.Raycast(ray, out RaycastHit hit, interactRange, interactLayer))
         {
             Debug.Log("interacted with:" + hit.collider.name);
         }
@@ -185,7 +205,7 @@ public class FPController : MonoBehaviour
             Shoot();
         }
     }
-   
+
     public void OnLook(InputAction.CallbackContext context) => lookInput = context.ReadValue<Vector2>();
     private void Shoot()
     {
@@ -235,6 +255,19 @@ public class FPController : MonoBehaviour
         verticalLookLimit);
         cameraTransform.localRotation = Quaternion.Euler(verticalRotation, 0f, 0f);
         transform.Rotate(Vector3.up * mouseX);
+    }
+    public void TakeDamage()
+    {
+        healthBar.fillAmount -= healthDamageAmount;
+        if (healthBar.fillAmount < 0f) healthBar.fillAmount = 0f;
+    }
+    //method for heal button 
+
+    public void Heal()
+    {
+        healthBar.fillAmount += healAmount;
+        if(healthBar.fillAmount < 1f)
+            healthBar.fillAmount = 1f;
     }
   
 
