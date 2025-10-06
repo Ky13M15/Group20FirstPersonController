@@ -108,7 +108,7 @@ public class FPController : MonoBehaviour
             }
         }
         //clear text if not looking at a pickup
-        pickupText.text = "";
+       
 
         float targetFOV = isAiming ? aimFOV : normalFOV;
         float newFOV = Mathf.Lerp(playerCamera.fieldOfView, targetFOV, Time.deltaTime * aimSpeed);
