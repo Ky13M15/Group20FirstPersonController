@@ -1,11 +1,7 @@
-﻿using System;
+using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using TMPro;
-using UnityEngine.UI;
-
-
-
 
 public class FPController : MonoBehaviour
 {
@@ -14,8 +10,19 @@ public class FPController : MonoBehaviour
     public float normalFOV = 60f;
     public float aimFOV = 40f;
     public float aimSpeed = 10f;
+   
     [SerializeField] private float interactRange = 3f;
     [SerializeField] LayerMask interactLayer;
+    
+    [SerializeField] float jetpackForce = 10f;
+    [SerializeField] float fuel = 100f;
+
+    [SerializeField] int ammoInClip = 10;
+    [SerializeField] int maxAmmo = 24;
+    [SerializeField] float reloadTime = 1.5f;
+    private bool isReloading = false;
+    
+
 
 
     private bool isAiming = false;
@@ -40,7 +47,7 @@ public class FPController : MonoBehaviour
     private float verticalRotation = 0f;
 
 
-    [Header("Shooting")]
+    [Header("Shooting Settings")]
     public GameObject bulletPrefab;
     public Transform gunPoint;
 
@@ -61,11 +68,11 @@ public class FPController : MonoBehaviour
     public float throwForce = 10f;
     public float throwUpwardBoost = 1f;
 
-    [Header("UI Settings")]
-    public TextMeshProUGUI pickUpText;
-    public Image healthBar;
-    public float healthDamageAmount = 0.25f;
-    private float healAmount = 0.5f;
+    [Header("Sprint settings")]
+    [SerializeField] private float sprintMultiplier;
+    private bool isSprinting=false;
+
+
 
 
     private void Awake()
@@ -108,7 +115,7 @@ public class FPController : MonoBehaviour
             }
         }
         //clear text if not looking at a pickup
-       
+
 
         float targetFOV = isAiming ? aimFOV : normalFOV;
         float newFOV = Mathf.Lerp(playerCamera.fieldOfView, targetFOV, Time.deltaTime * aimSpeed);
@@ -130,13 +137,25 @@ public class FPController : MonoBehaviour
         if (heldObject == null)
         {
             Ray ray = new(cameraTransform.position, cameraTransform.forward);
-            if (Physics.Raycast(ray, out RaycastHit hit, pickupRange))
+            if (Physics.Raycast(ray, out RaycastHit hit, interactRange, interactLayer))
+            {
+                if (hit.collider.GetComponent<IInteractable>() != null)
+                {
+                    pickupText.text = "Press E to interact";
+                }
+                else
+                {
+                    pickupText.text = "";
+                }
+            }
+
             {
                 PickupObject pickUp = hit.collider.GetComponent<PickupObject>();
                 if (pickUp != null)
                 {
                     pickUp.Pickup(holdPoint);
                     heldObject = pickUp;
+
                 }
             }
         }
@@ -185,15 +204,25 @@ public class FPController : MonoBehaviour
     }
     public void OnInteract(InputAction.CallbackContext context)
     {
+        if (context.performed) return;
         Ray ray = new Ray(playerCamera.transform.position, playerCamera.transform.forward);
 
         if (Physics.Raycast(ray, out RaycastHit hit, interactRange, interactLayer))
         {
-            Debug.Log("interacted with:" + hit.collider.name);
+            IInteractable interactable = hit.collider.GetComponent<IInteractable>();
+            if (interactable != null)
+            {
+                interactable.Interact();
+            }
+            else
+            {
+                Debug.Log("interacted with:" + hit.collider.name);
+            }
         }
+
         else
         {
-            Debug.Log("Nothing to inyteract with");
+            Debug.Log("Nothing to interact with");
         }
     }
 
@@ -221,6 +250,16 @@ public class FPController : MonoBehaviour
             }
 
         }
+    }
+        public void OnSprint(InputAction.CallbackContext context) {
+        if (context.performed)
+        {
+            isSprinting = true;
+        }
+        else if (context.canceled)
+        {
+            isSprinting = false;
+        }
 
     }
     public void OnCrouch(InputAction.CallbackContext context)
@@ -236,8 +275,10 @@ public class FPController : MonoBehaviour
             moveSpeed = originalMoveSpeed;
         }
     }
+
     public void HandleMovement()
     {
+        float currentSpeed = moveSpeed * (isSprinting ? sprintMultiplier: 1f);
         Vector3 move = transform.right * moveInput.x + transform.forward *
         moveInput.y;
         controller.Move(moveSpeed * Time.deltaTime * move);
@@ -256,24 +297,17 @@ public class FPController : MonoBehaviour
         cameraTransform.localRotation = Quaternion.Euler(verticalRotation, 0f, 0f);
         transform.Rotate(Vector3.up * mouseX);
     }
-    public void TakeDamage()
+    public void HandleJetpack()
     {
-        healthBar.fillAmount -= healthDamageAmount;
-        if (healthBar.fillAmount < 0f) healthBar.fillAmount = 0f;
+        if (Keyboard.current.spaceKey.isPressed && fuel > 0)
+        {
+            controller.Move(Vector3.up * jetpackForce * Time.deltaTime);
+            fuel -= Time.deltaTime * 5;
+        }
+        else
+        {
+            fuel = Math.Min(fuel + Time.deltaTime * 2, 100);
+        }
+
     }
-    //method for heal button 
-
-    public void Heal()
-    {
-        healthBar.fillAmount += healAmount;
-        if(healthBar.fillAmount < 1f)
-            healthBar.fillAmount = 1f;
-    }
-  
-
-   
-
-
 }
-
-
