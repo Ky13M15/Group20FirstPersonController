@@ -81,6 +81,7 @@
                     "name": "Quit",
                     "type": "Button",
                     "id": "a826134c-3027-4e80-a6c4-caa878af5198",
+                    HEAD
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -90,6 +91,7 @@
                     "name": "Jetpack",
                     "type": "Button",
                     "id": "ec16b91c-cf14-44d6-a4cc-60933f24cb35",
+                    parent of e4d55dc (Added scripts)
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -424,6 +426,7 @@
                     "processors": "",
                     "groups": ";Keyboard",
                     "action": "Quit",
+                    HEAD
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -446,6 +449,7 @@
                     "processors": "",
                     "groups": ";Gamepad",
                     "action": "Jetpack",
+                    parent of e4d55dc (Added scripts)
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
